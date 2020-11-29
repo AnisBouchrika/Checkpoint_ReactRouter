@@ -4,6 +4,8 @@ import Search from "./components/Search/Search";
 import MovieList from "./components/MovieList/MovieList";
 import { moviesData  } from "./Data";
 import AddMovie from './components/AddMovie/AddMovie';
+import { BrowserRouter as Router,Route,Switch,} from "react-router-dom";
+import DiscriptionTrailer from './components/DiscriptionTrailer/DiscriptionTrailer';
 
 
 
@@ -36,7 +38,13 @@ const App = () => {
             movie.rating >= searchRate
         )}
       />
-         <AddMovie handleAdd = {addMovie} />
+         <AddMovie handleAdd = {AddMovie} />
+         <Switch>
+           <Route exact path="/"> 
+             <div className="route"> <MovieList  movies ={movies} newMovie={newMovie}/></div>
+            </Route>                                                      
+            <Route exact path="/trailer/:name" render ={(props) => <DiscriptionTrailer res={movies}  {...props}   />}   />
+            </Switch>
 
       </div>
   )
