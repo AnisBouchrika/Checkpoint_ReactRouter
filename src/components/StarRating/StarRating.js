@@ -35,6 +35,8 @@ const StarRating = ({ rate, handleRate }) => {
       style={{
         padding: "0.5rem",
         fontSize: "20px",
+        textAlign:" center" ,
+      
       }}
     >
       {stars(rate)}

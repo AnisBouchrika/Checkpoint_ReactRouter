@@ -4,7 +4,7 @@ import Search from "./components/Search/Search";
 import MovieList from "./components/MovieList/MovieList";
 import { moviesData  } from "./Data";
 import AddMovie from './components/AddMovie/AddMovie';
-import { BrowserRouter as Router,Route,Switch,} from "react-router-dom";
+import { BrowserRouter as Router,Route,Switch} from "react-router-dom";
 import DiscriptionTrailer from './components/DiscriptionTrailer/DiscriptionTrailer';
 
 
@@ -13,7 +13,6 @@ const App = () => {
   const [movies , setMovies] = useState(moviesData);
   const [searchRate, setSearchRate] = useState(1);
   const [searchValue, setSearchValue] = useState("");
-
   const handleSearch = (event) => setSearchValue(event.target.value);
   const handleSearchRate = (newRate) => setSearchRate(newRate);
 
@@ -29,7 +28,12 @@ const App = () => {
         searchRate={searchRate}
         handleSearchRate={handleSearchRate}
       />
-       <MovieList
+     
+         <AddMovie handleAdd = {addMovie} />
+         <Switch>
+
+           <Route exact path="/"> 
+           <MovieList
         movieList={movies.filter(
           (movie) =>
             movie.name
@@ -38,10 +42,6 @@ const App = () => {
             movie.rating >= searchRate
         )}
       />
-         <AddMovie handleAdd = {AddMovie} />
-         <Switch>
-           <Route exact path="/"> 
-             <div className="route"> <MovieList  movies ={movies} newMovie={newMovie}/></div>
             </Route>                                                      
             <Route exact path="/trailer/:name" render ={(props) => <DiscriptionTrailer res={movies}  {...props}   />}   />
             </Switch>
